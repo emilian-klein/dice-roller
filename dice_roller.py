@@ -1,100 +1,75 @@
-import random
 import tkinter as tk
+import random
+from PIL import Image, ImageTk
 
 
 class DiceRoller(tk.Tk):
+    """
+        Attributes:
+            dice_images (list): List of image filenames for dice faces.
+
+        Methods:
+            __init__(self)
+                Initializes the DiceRoller GUI application with title, size, frames, labels, and buttons.
+
+            roll_dices(self)
+                Simulates rolling two dice, updates displayed dice images, and calculates the total value of the dice rolls.
+        """
     dice_images = ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png"]
 
     def __init__(self):
+        """
+        Initialize the DiceRoller GUI application.
+        Sets up the application window, creates frames, labels, and buttons.
+        """
         super().__init__()
         self.title("Dice Roller")
-        self.geometry("400x200")
+        self.geometry("400x220")
         self.resizable(False, False)
         self.iconbitmap("images/icon.ico")
-        self.font_style = ("Helvetica", "10", "bold")
+        self.sm_font_style = ("Helvetica", "10", "bold")
+        self.lg_font_style = ("Helvetica", "13", "bold")
 
         self.top_frame = tk.Frame(self)
-        self.top_frame.pack()
+        self.top_frame.pack(pady=10)
+        self.dice_image1 = tk.Label(self.top_frame)
+        self.dice_image1.pack(side=tk.LEFT)
+        self.dice_image2 = tk.Label(self.top_frame)
+        self.dice_image2.pack(side=tk.LEFT)
+
+        self.middle_frame = tk.Frame(self)
+        self.middle_frame.pack()
+        self.total_value = tk.Label(self.middle_frame, fg="cornflowerblue", font=self.lg_font_style)
+        self.total_value.pack()
 
         self.bottom_frame = tk.Frame(self)
-        self.bottom_frame.pack()
-
-        self.roll_button = tk.Button(self.bottom_frame, text="Roll dices", fg="white", bg="cornflowerblue", relief="groove",
-                                     command=self.roll_dices, font=self.font_style)
-        self.roll_button.pack()
-
-        self.exit_button = tk.Button(self.bottom_frame, text="Exit", fg="white", bg="cornflowerblue", relief="groove", command=self.quit,
-                                     font=self.font_style)
-        self.exit_button.pack()
+        self.bottom_frame.pack(pady=10)
+        self.roll_button = tk.Button(self.bottom_frame, text="Roll dices", fg="white", bg="cornflowerblue", relief="groove", command=self.roll_dices,
+                                     font=self.sm_font_style, width=10, cursor="hand2")
+        self.roll_button.pack(side=tk.LEFT, padx=10)
+        self.exit_button = tk.Button(self.bottom_frame, text="Exit", fg="white", bg="cornsilk4", relief="groove", command=self.quit, font=self.sm_font_style,
+                                     width=10, cursor="hand2")
+        self.exit_button.pack(side=tk.LEFT)
 
     def roll_dices(self):
-        dice_value = random.randint(1, 6)
-        dice_image = tk.PhotoImage(file=f"images/{dice_value}.png")
-
-        dice_image = dice_image.subsample(3)
-        dice_label = tk.Label(self.top_frame, image=dice_image)
-        dice_label.pack()
+        """
+        Simulates rolling two dice, updates displayed dice images, and calculates the total value of the dice rolls.
+        Generates two random numbers between 1 and 6 to simulate rolling two dice.
+        Updates the displayed images of the dice faces.
+        Calculates and displays the total value of the dice rolls.
+        """
+        total_value = 0
+        for dice_image_widget in [self.dice_image1, self.dice_image2]:
+            dice_value = random.randint(1, 6)
+            path_to_image = f"images/{dice_value}.png"
+            dice_image = ImageTk.PhotoImage(Image.open(path_to_image))
+            dice_image_widget.configure(image=dice_image)
+            dice_image_widget.image = dice_image
+            total_value += dice_value
+        self.total_value.config(text=f"Total value: {total_value}")
 
 
 if __name__ == "__main__":
     app = DiceRoller()
+    app.roll_dices()
     app.mainloop()
-
-# #Author: emilian-klein
-#
-# from tkinter import *
-# from PIL import Image, ImageTk
-# import random
-#
-# #function which is called when button is pressed
-# def rollDice():
-#     dice_value1 = random.choice(dice)
-#     dice_value2 = random.choice(dice)
-#     value = int(dice_value1.split('.')[0]) + int(dice_value2.split('.')[0])
-#     values_label.configure(text='Total value: ' + str(value))
-#     dice_image1 = ImageTk.PhotoImage(Image.open(dice_value1))
-#     dice_image2 = ImageTk.PhotoImage(Image.open(dice_value2))
-#     dice_label1.configure(image=dice_image1)
-#     dice_label1.image = dice_image1
-#     dice_label2.configure(image=dice_image2)
-#     dice_label2.image = dice_image2
-#
-# #main application window
-# root = Tk()
-# root.geometry('400x200')
-# root.title('Dice Roller')
-# root.resizable(False, False)
-# root.iconbitmap('icon.ico')
-#
-# #frames to separate widgets within the window
-# topframe = Frame(root)
-# topframe.pack(expand=TRUE)
-#
-# bottomframe = Frame(root)
-# bottomframe.pack()
-#
-# #list of dice pictures
-# dice = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png']
-# dice_value1 = random.choice(dice)
-# dice_value2 = random.choice(dice)
-# dice_image1 = ImageTk.PhotoImage(Image.open(dice_value1))
-# dice_image2 = ImageTk.PhotoImage(Image.open(dice_value2))
-#
-# dice_label1 = Label(topframe, image=dice_image1)
-# dice_label1.image = dice_image1
-# dice_label1.pack(side=LEFT)
-#
-# dice_label2 = Label(topframe, image=dice_image2)
-# dice_label2.image = dice_image2
-# dice_label2.pack(side=LEFT)
-#
-# #getting sum of dice_value1 and dice_value2
-# value = int(dice_value1.split('.')[0]) + int(dice_value2.split('.')[0])
-# values_label = Label(bottomframe, text='Total value: ' + str(value))
-# values_label.pack(side=TOP)
-#
-# roll_button = Button(bottomframe, text='Roll the dice', fg='blue', relief='groove', command=rollDice)
-# roll_button.configure(font=('Helvetica', '10', 'bold'))
-# roll_button.pack()
-#
-# root.mainloop()
