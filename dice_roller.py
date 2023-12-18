@@ -6,21 +6,20 @@ from PIL import Image, ImageTk
 class DiceRoller(tk.Tk):
     """
         Attributes:
-            dice_images (list): List of image filenames for dice faces.
+            dice_images (list): List of images which represents dice faces.
 
         Methods:
             __init__(self)
-                Initializes the DiceRoller GUI application with title, size, frames, labels, and buttons.
+                Initializes the DiceRoller GUI application.
 
             roll_dices(self)
-                Simulates rolling two dice, updates displayed dice images, and calculates the total value of the dice rolls.
+                Simulates rolling two dice.
         """
     dice_images = ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png"]
 
     def __init__(self):
         """
-        Initialize the DiceRoller GUI application.
-        Sets up the application window, creates frames, labels, and buttons.
+        Initializes the DiceRoller GUI application. Sets up the application window size, font styles and places widgets like labels and buttons.
         """
         super().__init__()
         self.title("Dice Roller")
@@ -53,10 +52,7 @@ class DiceRoller(tk.Tk):
 
     def roll_dices(self):
         """
-        Simulates rolling two dice, updates displayed dice images, and calculates the total value of the dice rolls.
-        Generates two random numbers between 1 and 6 to simulate rolling two dice.
-        Updates the displayed images of the dice faces.
-        Calculates and displays the total value of the dice rolls.
+        Simulates rolling two dice. Updates displayed dice images and calculates the total value of the dice rolls.
         """
         total_value = 0
         for dice_image_widget in [self.dice_image1, self.dice_image2]:
