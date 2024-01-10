@@ -5,21 +5,14 @@ from PIL import Image, ImageTk
 
 class DiceRoller(tk.Tk):
     """
-        Attributes:
-            dice_images (list): List of images which represents dice faces.
-
-        Methods:
-            __init__(self)
-                Initializes the DiceRoller GUI application.
-
-            roll_dices(self)
-                Simulates rolling two dice.
-        """
+    Application main class.
+    """
     dice_images = ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png"]
 
     def __init__(self):
         """
-        Initializes the DiceRoller GUI application. Sets up the application window size, font styles and places widgets like labels and buttons.
+        Initializes the DiceRoller GUI application.
+        Sets up the application window size, font styles and places widgets like labels and buttons.
         """
         super().__init__()
         self.title("Dice Roller")
@@ -38,8 +31,8 @@ class DiceRoller(tk.Tk):
 
         self.middle_frame = tk.Frame(self)
         self.middle_frame.pack()
-        self.total_value = tk.Label(self.middle_frame, fg="cornflowerblue", font=self.lg_font_style)
-        self.total_value.pack()
+        self.total_value_label = tk.Label(self.middle_frame, fg="cornflowerblue", font=self.lg_font_style)
+        self.total_value_label.pack()
 
         self.bottom_frame = tk.Frame(self)
         self.bottom_frame.pack(pady=10)
@@ -62,7 +55,7 @@ class DiceRoller(tk.Tk):
             dice_image_widget.configure(image=dice_image)
             dice_image_widget.image = dice_image
             total_value += dice_value
-        self.total_value.config(text=f"Total value: {total_value}")
+        self.total_value_label.config(text=f"Total value: {total_value}")
 
 
 if __name__ == "__main__":
