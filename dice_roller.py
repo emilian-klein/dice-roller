@@ -52,7 +52,7 @@ class DiceRoller(tk.Tk):
 
     def roll_dices(self):
         """
-        Simulates rolling two dice. Updates displayed dice images and calculates the total value of the dice rolls.
+        Simulates rolling two dice after pressing the button. Updates displayed dice images and calculates the total value of the dice rolls.
         """
         total_value = 0
         for dice_image_widget in [self.dice_image1, self.dice_image2]:
