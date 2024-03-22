@@ -5,17 +5,10 @@ from PIL import Image, ImageTk
 
 
 class DiceRoller(tk.Tk):
-    """
-    Application main class.
-    """
     dice_images = ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png"]
     images_path = "images"
 
     def __init__(self):
-        """
-        Initializes the DiceRoller GUI application.
-        Sets up the application window size, font styles and places widgets like labels and buttons.
-        """
         super().__init__()
         self.title("Dice Roller")
         self.geometry("400x220")
@@ -51,9 +44,6 @@ class DiceRoller(tk.Tk):
         self.exit_button.pack(side="left")
 
     def roll_dices(self):
-        """
-        Simulates rolling two dice after pressing the button. Updates displayed dice images and calculates the total value of the dice rolls.
-        """
         total_value = 0
         for dice_image_widget in [self.dice_image1, self.dice_image2]:
             dice_value = random.randint(1, 6)
