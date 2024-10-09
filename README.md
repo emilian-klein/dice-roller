@@ -4,6 +4,11 @@ Simple Python application built with Tkinter which allows user to roll two six-s
     <img src="images/app.png">
 </p>
 
+### Required Python version
+```
+>=3.12.0
+```
+
 ### Setup
 1. Clone this repository or download ZIP file:
 ```
