@@ -6,7 +6,7 @@ Simple Python application built with Tkinter which allows user to roll two six-s
 
 ### Required Python version
 ```
->=3.12.0
+>=3.8.0
 ```
 
 ### Setup
